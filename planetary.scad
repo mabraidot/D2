@@ -2,7 +2,7 @@
 
 use <MCAD/involute_gears.scad>
 
-$fn = 150;
+//$fn = 150;
 //fourgears();
 //ring1();
 //ring2();
