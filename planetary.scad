@@ -3,11 +3,11 @@
 use <MCAD/involute_gears.scad>
 
 //$fn = 150;
-//fourgears();
+fourgears();
 //ring1();
 //ring2();
 //ballbearingCap();
-assembly();
+//assembly();
 
 
 d1= 60;// diameter of lower ring
@@ -65,17 +65,19 @@ module assembly(){
     sun();
     rotate([0,0,360*R2*$t])translate([(ns+np1)/pitch/2,0,0])rotate([0,0,-360*R2*(1+Rp)*$t])
     planet();
-    rotate([0,0,120+360*R2*$t])translate([(ns+np1)/pitch/2,0,0])rotate([0,0,-120-360*R2*(1+Rp)*$t])
+    rotate([0,0,90+360*R2*$t])translate([(ns+np1)/pitch/2,0,0])rotate([0,0,-120-360*R2*(1+Rp)*$t])
     planet();
-    rotate([0,0,-120+360*R2*$t])translate([(ns+np1)/pitch/2,0,0])rotate([0,0,120-360*R2*(1+Rp)*$t])
+    rotate([0,0,-90+360*R2*$t])translate([(ns+np1)/pitch/2,0,0])rotate([0,0,120-360*R2*(1+Rp)*$t])
+    planet();
+    rotate([0,0,-180+360*R2*$t])translate([(ns+np1)/pitch/2,0,0])rotate([0,0,120-360*R2*(1+Rp)*$t])
     planet();
 }
 
 
 module fourgears(){
 	sun();
-	for(i=[0,120,-120])
-		rotate([0,0,i])translate([1.2*(ns+np1)/pitch/2,0,0])
+	for(i=[0,90,-90,180])
+		rotate([180,0,i])translate([1.2*(ns+np1)/pitch/2,0,-(t+td)*2])
 			rotate([0,0,-i])planet();
 }
 
@@ -146,7 +148,7 @@ module ring1() {
             difference(){
                 translate([0,0,-0.2])cylinder(r=(nr1/pitch/2/dp)+4, h=2*t+2*s+td+4.5);
                 translate([0,0,-0.5])cylinder(r=(nr1/pitch/2/dp), h=2*t+2*s+td+6);
-                translate([0,0,2*t+2*s+td-0.4])rotate([180,0,0])ballSlot(nr1+c);
+                translate([0,0,2*t+2*s+td-0.4])rotate([180,0,0])ballSlot(nr1);
                 
                 // Ballbearing insertion hole
                 union(){
@@ -173,7 +175,7 @@ module ring2(){
     union(){
         difference(){
             insidegear(nr2);
-            translate([0,0,1.5])ballSlot(nr2-c);
+            translate([0,0,1.5])ballSlot(nr2);
         }
         translate([0,0,-attachmentHeight-0.1-extraHeight])armAttachment(attachmentRadius, attachmentHeight+extraHeight);
     }
