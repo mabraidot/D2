@@ -1,3 +1,5 @@
+use <gt2_pulley_22.scad>
+use <gt2_pulley_100.scad>
 
 /**************************************/
 //$fn = 150;
@@ -7,6 +9,8 @@ armLength = 180;
 bearingDiam = 22.8;
 /**************************************/
 
+translate([0,50,0])gt2SmallPulley();
+translate([0,-70,0])gt2BigPulley();
 arm();
 
 

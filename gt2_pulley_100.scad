@@ -108,6 +108,11 @@ if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 )
 if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
 if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
+module gt2BigPulley(){
+    pulley ( "GT2 2mm" , tooth_spacing (2,0.254) , 0.764 , 1.494 );
+}
+
+
 // Functions
 
 function tooth_spaceing_curvefit (b,c,d)

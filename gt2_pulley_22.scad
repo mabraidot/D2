@@ -10,6 +10,7 @@
 // dxf tooth data from http://oem.cadregister.com/asp/PPOW_Entry.asp?company=915217&elementID=07807803/METRIC/URETH/WV0025/F
 // pulley diameter checked and modelled from data at http://www.sdp-si.com/D265/HTML/D265T016.html
 
+
 /**
  * @name Pulley
  * @category Printed
@@ -91,6 +92,11 @@ if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 )
 if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
 if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
 if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
+
+
+module gt2SmallPulley(){
+    pulley ( "GT2 2mm" , tooth_spacing (2,0.254) , 0.764 , 1.494 );
+}
 
 // Functions
 
