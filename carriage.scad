@@ -1,4 +1,4 @@
-
+use <arm.scad>
 //$fn = 100;
 support_width = 10.6;
 width = 76;
@@ -79,3 +79,5 @@ module carriage() {
 }
 
 carriage();
+//rotate([0,0,90])carriage();
+//translate([-38.6,5,-96])rotate([90,10,0])arm();

@@ -12,7 +12,6 @@ module nut(){
 }
 
 module arm(){
-    
     difference(){
         union(){
             difference(){
@@ -24,6 +23,10 @@ module arm(){
             translate([-20,0,0])rotate([0,0,-8])cube([10,108,support_width]);
         }
         translate([0,0,-1])cylinder(r=shaft_diam/2, h=30);
+        // Mounting hole
+        //translate([-20,70,((support_width/2)-(3.4/2))])rotate([0,0,10])cube([40,30,3.4]);
+        translate([-20,97,support_width/2])rotate([-10,90,0])cylinder(r=1.7, h=40);
+    
     }
     
 }
