@@ -1,6 +1,6 @@
 h = 7;
 r = h/2 / cos(30);
-rode_diam = 5.6;
+rod_diam = 5.6;
 
 module jaws() {
   difference() {
@@ -25,7 +25,7 @@ module jaws() {
     rotate([90, 0, 0]) cylinder(r=1.55, h=40, center=true, $fn=12);
     // Rod hole
     translate([19, 0, 0]) rotate([0, 90, 0])
-      cylinder(r=rode_diam/2, h=20, center=true, $fn=12);
+      cylinder(r=rod_diam/2, h=20, center=true, $fn=12);
   }
 }
 
