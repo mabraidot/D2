@@ -1,4 +1,6 @@
 
+//$fn = 100;
+support_width = 10.6;
 width = 76;
 height = 24;
 
@@ -25,7 +27,7 @@ module parallel_joints(reinforced) {
         rotate([0, 90, 0]) cylinder(r=1.55, h=80, center=true, $fn=12);
 
         for (x = [-offset, offset]) {
-            translate([x, 5.5, 0])cylinder(r=cutout/2, h=100, center=true, $fn=24);
+            translate([x, 5.5, 0])cylinder(r=cutout/2, h=100, center=true);
             translate([x, -4.5, 0])cube([cutout, 20, 100], center=true);
             translate([x, 0, 0]) rotate([0, 90, 0]) rotate([0, 0, 30])cylinder(r=3.3, h=17, center=true, $fn=6);
         }
@@ -35,16 +37,45 @@ module parallel_joints(reinforced) {
     }
 }
 
+
+
 module carriage() {
-    
-    union() {
-        translate([0, 0, 0])parallel_joints(16);
+    difference(){
+        union(){
+            difference(){
+                parallel_joints(16);
+                union(){
+                    mirror([1,0,0])translate([39,11,-5])intersection(){
+                        translate([-10,-8, 0])cube([10,16,25]);
+                        translate([0, 0, 0])rotate([0,0,45])cube([10,10,25]);
+                    }
+                    translate([39,11,-5])intersection(){
+                        translate([-10,-8, 0])cube([10,16,25]);
+                        translate([0, 0, 0])rotate([0,0,45])cube([10,10,25]);
+                    }
+                }
+            }
+            difference(){
+                translate([0, 9.5, -4])union(){
+                    translate([20,0,0])intersection(){
+                        translate([0, 8, 0])cube([10,16,20]);
+                        translate([0, 0, 0])rotate([0,0,45])cube([10,10,20]);
+                    }
+                    translate([-20, 8, 0])cube([40,6.1,20]);
+                    mirror([1,0,0])translate([20,0,0])intersection(){
+                        translate([0, 8, 0])cube([10,16,20]);
+                        translate([0, 0, 0])rotate([0,0,45])cube([10,10,20]);
+                    }
+                }
+                w=support_width;
+                translate([-(w/2), 18, -5])cube([w,10,25]);
+            }
+        }
+        translate([-50, 10, 12])cube([100,20,15]);
+        // bolt hole
+        translate([0,10,3])rotate([90, 90, 0]) cylinder(r=1.55, h=30, center=true, $fn=12);
     }
-      
+    
 }
 
 carriage();
-
-// Uncomment the following lines to check endstop alignment.
-// use <idler_end.scad>;
-// translate([0, 0, -20]) rotate([180, 0, 0]) idler_end();
