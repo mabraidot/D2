@@ -1,6 +1,6 @@
 
 support_width = 10; // The same as in carriage.scad, thoug without clearance
-shaft_diam = 5.5;
+shaft_diam = 5.2;
 $fn = 100;
 
 module nut(){
