@@ -14,9 +14,9 @@ module support(){
         }
     }
 }
-module fints(){
+module fins(){
     translate([0,0,28])intersection() {
-        cube([5, 60, 46], center=true);
+        cube([5, 40, 46], center=true);
         rotate([45, 0, 0]) translate([0, -50, 0])
         cube([20, 100, 100], center=true);
     }
@@ -24,10 +24,14 @@ module fints(){
 
 module delta(){
     arm_angle = 45;
+    intersection(){
+        translate([0,0,16])cube([62,62,32], center=true);
+        sphere(r=26, $fn = 100);
+    }
     for(a=[0:2]){
         rotate([0,0,(120*a)])translate([-54,0,0])support();
         
-        rotate([0,0,(120*a)+90])translate([11,9.5,0])rotate([0,0,90])fints();
+        rotate([0,0,(120*a)+90])translate([11,9.5,0])rotate([0,0,90])fins();
         rotate([0,0,(120*a)+90])translate([60,2,5])motor_end(false);
         
         rotate([0,90,120*a])translate([-25,60,0])rotate([0,0,arm_angle])arm();
