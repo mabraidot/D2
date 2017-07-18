@@ -12,7 +12,7 @@ module wall(h){
 }
 
 
-module motor_end() {
+module motor_end(holes=true) {
     translate([0, 0, h/2]) 
     difference() {
     union() {
@@ -27,13 +27,17 @@ module motor_end() {
         // Extra mounting screw holes.
         translate([x, 47, 4-h/2]) difference() {
           cylinder(r=5, h=8, center=true, $fn=24);
-          translate([0, 1, 0]) cylinder(r=1.9, h=9, center=true, $fn=12);
+          if(holes){
+            translate([0, 1, 0]) cylinder(r=1.9, h=9, center=true, $fn=12);
+          }
         }
       }
     }
     // Sandwich mount.
-    translate([-w/2, 10, 0]) cylinder(r=1.9, h=h+1, center=true);
-    translate([w/2, 10, 0]) cylinder(r=1.9, h=h+1, center=true);
+    if(holes){
+        translate([-w/2, 10, 0]) cylinder(r=1.9, h=h+1, center=true);
+        translate([w/2, 10, 0]) cylinder(r=1.9, h=h+1, center=true);
+    }
     
     // Motor shaft
     rotate([90, 0, 0]) cylinder(r=12, h=40, center=true);
