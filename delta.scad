@@ -25,10 +25,10 @@ radius2 = radius/cos(30);
 
 module support(){
     union(){
-        translate([57.4,-25,0])rotate([0,0,45])cube([30,60,5]);
+        translate([55,-35,0])rotate([0,0,30])cube([30,60,5]);
         difference(){
-            cube([47,95,5]);
-            translate([0,-25,-2])rotate([0,0,45])cube([30,40,9]);
+            translate([-10,0,0])cube([57,95,5]);
+            translate([0,-25,-2])rotate([0,0,45])cube([30,50,9]);
         }
     }
 }
