@@ -36,8 +36,7 @@ module support(){
 module fins(){
     translate([0,0,28])intersection() {
         cube([5, 40, 46], center=true);
-        rotate([45, 0, 0]) translate([0, -50, 0])
-        cube([20, 100, 100], center=true);
+        rotate([45, 0, 0]) translate([0, -53, 0])cube([20, 100, 100], center=true);
     }
 }
 
@@ -47,15 +46,14 @@ module delta(){
     
     // Center spheric support
     intersection(){
-        translate([0,0,16])cube([62,62,32], center=true);
-        rotate([0,0,30])sphere(r=26, $fn = 6);
+        translate([0,0,21])cube([62,62,32], center=true);
+        rotate([0,0,0])sphere(r=35.9, $fn = 6);
     }
     
     for(a=[0:2]){
         rotate([0,0,(120*a)])translate([-62,-10,0])support();
         
-        
-        rotate([0,0,(120*a)+90])translate([1,17.5,0])rotate([0,0,90])fins();
+        //rotate([0,0,(120*a)+90])translate([-2,17.5,0])rotate([0,0,90])fins();
         rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false);
         
         // Motor and arm
