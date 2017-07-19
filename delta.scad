@@ -27,14 +27,14 @@ module microSwitch(){
         difference(){
             union(){
                 translate([8,0,0])cube([3,15,20]);
-                cube([11,15,10]);
+                cube([11,15,8]);
                 
             }
             union(){
                 translate([1.5,1.5,-1])cube([5.82,12.6,12]);
                 translate([-1,6.5,-1])cube([5,2.6,12]);
             }
-            rotate([0,-90,0])translate([15,7.5,-20])nut();
+            //rotate([0,-90,0])translate([15,7.5,-20])nut();
         }
         translate([1.5,4.5,5.2])sphere(r=1, $fn=50);
         translate([1.5,11.1,5.2])sphere(r=1, $fn=50);
@@ -63,8 +63,6 @@ module delta(){
     
     arm_angle = 0;
     
-    rotate([0,0,0])translate([50,0,50])microSwitch();
-    
     // Center spheric support
     intersection(){
         translate([0,0,21])cube([62,62,32], center=true);
@@ -73,6 +71,8 @@ module delta(){
     
     for(a=[0:2]){
         rotate([0,0,(120*a)])translate([-62,-10,0])support();
+        
+        rotate([0,-120,(120*a)-30])translate([11,-8,-40])microSwitch();
         
         //rotate([0,0,(120*a)+90])translate([-2,17.5,0])rotate([0,0,90])fins();
         rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false);
