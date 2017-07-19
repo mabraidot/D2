@@ -3,6 +3,22 @@ use <motor_end.scad>
 
 use <nema.scad>
 
+/*
+
+EndSwitchs
+
+        5.82
+  _    |___|
+       /  /| _
+ 12.6 /  / | 1 (desde el fondo del switch hasta el centro del hueco)
+  _  /__/ o/
+ 6.2 |  |o/|
+  _  |__|/|6.6 (centro a centro de los huecos, equidistantes horizontalmente)
+    
+    o: m2
+    
+*/
+
 radius = 100; // 175
 radius2 = radius/cos(30);
 
@@ -43,7 +59,7 @@ module delta(){
         rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false);
         
         // Motor and arm
-        rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(47);
+        rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
         rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
     }
     //cylinder(r=radius2, h=5, center=true, $fn=6);
