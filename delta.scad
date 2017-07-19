@@ -3,9 +3,13 @@ use <motor_end.scad>
 
 use <nema.scad>
 
-/*
 
-EndSwitchs
+radius = 100; // 175
+radius2 = radius/cos(30);
+
+
+module microSwitch(){
+/*
 
         5.82
   _    |___|
@@ -18,9 +22,24 @@ EndSwitchs
     o: m2
     
 */
-
-radius = 100; // 175
-radius2 = radius/cos(30);
+    
+    union(){
+        difference(){
+            union(){
+                translate([8,0,0])cube([3,15,20]);
+                cube([11,15,10]);
+                
+            }
+            union(){
+                translate([1.5,1.5,-1])cube([5.82,12.6,12]);
+                translate([-1,6.5,-1])cube([5,2.6,12]);
+            }
+            rotate([0,-90,0])translate([15,7.5,-20])nut();
+        }
+        translate([1.5,4.5,5.2])sphere(r=1, $fn=50);
+        translate([1.5,11.1,5.2])sphere(r=1, $fn=50);
+    }
+}
 
 
 module support(){
@@ -43,6 +62,8 @@ module fins(){
 module delta(){
     
     arm_angle = 0;
+    
+    rotate([0,0,0])translate([50,0,50])microSwitch();
     
     // Center spheric support
     intersection(){
