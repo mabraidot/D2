@@ -17,19 +17,19 @@ module motor_end(holes=true) {
     difference() {
     union() {
       wall(h);
-      for (x = [-30, 30]) {
+      for (x = [-32.5, 32.5]) {
         // Diagonal fins.
-        translate([x, 29.5, 0]) intersection() {
-          cube([5, 30, h], center=true);
-          rotate([45, 0, 0]) translate([0, -50, 0])
+        translate([x, 25, 0]) intersection() {
+          cube([5, 37, h], center=true);
+          rotate([45, 0, 0]) translate([0, -48, 0])
             cube([20, 100, 100], center=true);
         }
         // Extra mounting screw holes.
-        translate([x, 47, 4-h/2]) difference() {
-          cylinder(r=5, h=8, center=true, $fn=24);
-          if(holes){
-            translate([0, 1, 0]) cylinder(r=1.9, h=9, center=true, $fn=12);
-          }
+        if(holes){
+            translate([x, 47, 4-h/2]) difference() {
+                cylinder(r=5, h=8, center=true, $fn=24);
+                translate([0, 1, 0]) cylinder(r=1.9, h=9, center=true, $fn=12);
+            }
         }
       }
     }
@@ -37,6 +37,9 @@ module motor_end(holes=true) {
     if(holes){
         translate([-w/2, 10, 0]) cylinder(r=1.9, h=h+1, center=true);
         translate([w/2, 10, 0]) cylinder(r=1.9, h=h+1, center=true);
+    }else{
+        translate([-w/2, 10, h-20]) cylinder(r=1.9, h=h, center=true);
+        translate([w/2, 10, h-20]) cylinder(r=1.9, h=h, center=true);
     }
     
     // Motor shaft
