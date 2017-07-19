@@ -11,7 +11,34 @@ module nut(){
     }
 }
 
+
+module stopper(){
+    
+     difference(){
+        union(){
+            translate([0,0,-2])cube([10,10,support_width+4]);
+            // fin 1
+            translate([-7,1,-2])cube([7,9,2]);
+            translate([-7,5.5,-2])cylinder(r=4.5, h=2);
+            // fin 2
+            translate([-7,1,support_width])cube([7,9,2]);
+            translate([-7,5.5,support_width])cylinder(r=4.5, h=2);
+        }
+        union(){
+            rotate([0,0,45])translate([-5,-9,-3])cube([20,10,support_width+6]);
+            translate([-19.3,6,-0.1])cylinder(r=20, h=support_width+0.2);
+        }
+        translate([-5.25,5.5,-11])nut();
+        translate([-19,6,-4])cylinder(r=10, h=20);
+    }
+    
+    
+}
+
+
 module arm(){
+    
+    
     difference(){
         union(){
             difference(){
@@ -34,10 +61,19 @@ module arm(){
         //translate([-20,97,support_width/2])rotate([-10,90,0])cylinder(r=1.7, h=40);
         // Right hand
         translate([-20,102,support_width/2])rotate([10,90,0])cylinder(r=1.7, h=40);
-    
+        
+        // Endswitch stopper mounting
+        translate([0,0,-1])difference(){
+            cylinder(r=16, h=support_width+2);
+            translate([0,0,-1])cylinder(r=12.7, h=support_width+4);
+            translate([-25,-20,-1])rotate([0,0,30])cube([50,30,support_width+4]);
+        }
+        
+        
     }
     
-    
+    rotate([0,0,-80])translate([20.5,0,0])rotate([0,0,17])stopper();
 }
+
 
 arm();
