@@ -59,6 +59,30 @@ module fins(){
     }
 }
 
+
+module rodMounting(){
+    
+    rod_d = 8; // Rod diameter
+    rod_h = 50; // Rod diameter
+    fin_h = 30;
+    ang = 45;
+    
+    union(){
+        rotate([ang,0,0])difference(){
+            cylinder(r=rod_d, h=rod_h, center=true);
+            translate([0,0,-1])cylinder(r=rod_d/2, h=rod_h+5, center=true);
+        }
+        translate([0,-4,-5])intersection() {
+            cube([5, fin_h, fin_h], center=true);
+            rotate([ang, 0, 0]) translate([0, -fin_h, 0])cube([20, fin_h*2, fin_h*2], center=true);
+        }
+        rotate([ang,0,0])translate([0,0,rod_h/2])sphere(r=rod_d, center=true);
+    }
+    
+    
+}
+
+
 module delta(){
     
     arm_angle = 0;
@@ -68,6 +92,8 @@ module delta(){
         translate([0,0,21])cube([62,62,32], center=true);
         rotate([0,0,0])sphere(r=35.9, $fn = 6);
     }
+    
+    translate([150,0,0])rodMounting();
     
     for(a=[0:2]){
         rotate([0,0,(120*a)])translate([-62,-10,0])support();
