@@ -93,8 +93,6 @@ module delta(){
         rotate([0,0,0])sphere(r=35.9, $fn = 6);
     }
     
-    translate([150,0,0])rodMounting();
-    
     for(a=[0:2]){
         rotate([0,0,(120*a)])translate([-62,-10,0])support();
         
@@ -106,6 +104,9 @@ module delta(){
         // Motor and arm
         rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
         rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
+        
+        // Rod support
+        rotate([0,0,(120*a)+60])translate([-20,60,23.3])rodMounting();
     }
     //cylinder(r=radius2, h=5, center=true, $fn=6);
 }
