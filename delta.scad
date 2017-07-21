@@ -83,6 +83,7 @@ module rodMountingFoot(rod_h){
     ang = 45;
     
     union(){
+        // rods
         rotate([0,ang,ang])translate([0,0,rod_h/2])rotate([0,0,0])difference(){
             cylinder(r=rod_d, h=rod_h, center=true);
             translate([0,0,-1])cylinder(r=rod_d/2, h=rod_h+5, center=true);
@@ -96,9 +97,8 @@ module rodMountingFoot(rod_h){
             translate([0,0,-1])cylinder(r=rod_d/2, h=rod_h+5, center=true);
         }
         sphere(r=rod_d, center=true);
-    }
-    
-    union(){
+        
+        // fins
         intersection(){
             translate([-5,25,-7])rotate([0,35,0])fins(30);
             translate([-13,9,10])rotate([-45,35,-20])cube([20,40,40]);
@@ -107,8 +107,9 @@ module rodMountingFoot(rod_h){
             translate([-5,12,18])rotate([90,35,90])fins(30);
             translate([3,0,0])rotate([-20,30,-20])cube([40,20,40]);
         }
+        translate([-12,18,-rod_d+2.5])rotate([0,90,0])translate([0,0,0])fins(30);
     }
-    translate([-12,18,-rod_d+2.5])rotate([0,90,0])translate([0,0,0])fins(30);
+    
         
 }
 
@@ -144,8 +145,8 @@ module delta(){
             
             
             // Motor and arm
-            //rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
-            //rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
+            rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
+            rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
             
         }
     }
