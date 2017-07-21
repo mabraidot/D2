@@ -7,7 +7,7 @@ use <nema.scad>
 rod_d = 8; // Rod diameter
 //rod_h = 50; // Rod support height
 
-module microSwitch(){
+module microSwitch(negative){
 /*
 
         5.82
@@ -25,7 +25,11 @@ module microSwitch(){
     union(){
         difference(){
             union(){
-                translate([8,0,0])cube([3,15,20]);
+                if(negative){
+                    translate([7.8,-0.2,0])cube([3.4,15.4,22]);
+                }else{
+                    translate([8,0,0])cube([3,15,20]);
+                }
                 cube([11,15,8]);
                 
             }
@@ -33,7 +37,6 @@ module microSwitch(){
                 translate([1.5,1.5,-1])cube([5.82,12.6,12]);
                 translate([-1,6.5,-1])cube([5,2.6,12]);
             }
-            //rotate([0,-90,0])translate([15,7.5,-20])nut();
         }
         translate([1.5,4.5,5.2])sphere(r=1, $fn=50);
         translate([1.5,11.1,5.2])sphere(r=1, $fn=50);
@@ -115,42 +118,52 @@ module rodMountingFoot(rod_h){
 
 
 
-module delta(){
+module delta(export){
     
     arm_angle = 0;
         
-    union(){
-        // Center spheric support
-        intersection(){
-            translate([0,0,21])cube([62,62,32], center=true);
-            rotate([0,0,0])sphere(r=35.9, $fn = 6);
+    difference(){
+        union(){
+            // Center spheric support
+            intersection(){
+                translate([0,0,21])cube([62,62,32], center=true);
+                rotate([0,0,0])sphere(r=35.9, $fn = 6);
+            }
+            
+            for(a=[0:2]){
+                difference(){
+                    rotate([0,0,(120*a)])translate([-62,-10,0])support();
+                    rotate([45,0,(120*a)+90])translate([10,40,-30])cylinder(r=6, h=40, center=true);    
+                }
+                
+                //rotate([0,-120,(120*a)+90])translate([11,-8,-40])microSwitch();
+                
+                rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false);
+                
+                // Rod support
+                //rotate([0,0,(120*a)+60])translate([-19,60,23.3])rodMounting();
+                difference(){
+                    rotate([0,0,(120*a)+90])translate([10,40,15])rodMounting(60);
+                    rotate([0,0,(120*a)+90])translate([-5,10,-15])cube([35,60,15]);
+                }
+                
+                
+                // Motor and arm
+                if(!export){
+                    rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
+                    rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
+                }
+                
+            }
         }
-        
-        for(a=[0:2]){
-            difference(){
-                rotate([0,0,(120*a)])translate([-62,-10,0])support();
-                rotate([45,0,(120*a)+90])translate([10,40,-30])cylinder(r=6, h=40, center=true);    
+        union(){
+            for(a=[0:2]){
+                rotate([0,-120,(120*a)+90])translate([11,-8,-40])microSwitch(true);
             }
-            
-            rotate([0,-120,(120*a)+90])translate([11,-8,-40])microSwitch();
-            
-            rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false);
-            
-            // Rod support
-            //rotate([0,0,(120*a)+60])translate([-19,60,23.3])rodMounting();
-            difference(){
-                rotate([0,0,(120*a)+90])translate([10,40,15])rodMounting(60);
-                rotate([0,0,(120*a)+90])translate([-5,10,-15])cube([35,60,15]);
-            }
-            
-            
-            // Motor and arm
-            rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
-            rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
-            
         }
     }
 }
 
+//microSwitch(false);
 //rodMountingFoot(50);
-delta();
+delta(true);
