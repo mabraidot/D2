@@ -121,13 +121,13 @@ module rodMountingFoot(rod_h){
 module delta(export){
     
     arm_angle = 0;
-        
+    
     difference(){
         union(){
             // Center spheric support
             intersection(){
                 translate([0,0,21])cube([62,62,32], center=true);
-                rotate([0,0,0])sphere(r=35.9, $fn = 6);
+                sphere(r=35.9, $fn = 6);
             }
             
             for(a=[0:2]){
@@ -159,7 +159,17 @@ module delta(export){
         union(){
             for(a=[0:2]){
                 rotate([0,-120,(120*a)+90])translate([11,-8,-40])microSwitch(true);
+                
+                rotate([0,0,(120*a)+20])translate([25,0,-4])rotate([0,0,90])union(){
+                    cube([5,7,10]);
+                    translate([0,0,9])cube([5,12,5]);
+                }
             }
+            
+        }
+        union(){
+            translate([0,0,26])cylinder(r=4, h=50, center=true);
+            translate([0,0,-1])cylinder(r=2.5, h=10, center=true);
         }
     }
 }
