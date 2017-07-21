@@ -3,9 +3,9 @@ use <motor_end.scad>
 
 use <nema.scad>
 
-
+$fn=100;
 rod_d = 8; // Rod diameter
-//rod_h = 50; // Rod support height
+
 
 module microSwitch(negative){
 /*
@@ -138,7 +138,7 @@ module delta(export){
                 
                 //rotate([0,-120,(120*a)+90])translate([11,-8,-40])microSwitch();
                 
-                rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false);
+                rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false, false);
                 
                 // Rod support
                 //rotate([0,0,(120*a)+60])translate([-19,60,23.3])rodMounting();

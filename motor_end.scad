@@ -12,17 +12,23 @@ module wall(h){
 }
 
 
-module motor_end(holes=true) {
+module motor_end(holes=true,rightfin=true){
+    
+    array_fins = [32.5];
+    if(rightfin){
+        array_fins = [-32.5, 32.5];
+    }
+      
     translate([0, 0, h/2]) 
     difference() {
     union() {
       wall(h);
-      for (x = [-32.5, 32.5]) {
+      
+      for (x = array_fins) {
         // Diagonal fins.
         translate([x, 25, 0]) intersection() {
           cube([5, 37, h], center=true);
-          rotate([45, 0, 0]) translate([0, -48, 0])
-            cube([20, 100, 100], center=true);
+          rotate([45, 0, 0]) translate([0, -48, 0])cube([20, 100, 100], center=true);
         }
         // Extra mounting screw holes.
         if(holes){
@@ -52,4 +58,4 @@ module motor_end(holes=true) {
   }
 }
 
-motor_end();
+motor_end(true,true);
