@@ -10,27 +10,34 @@ module nut(){
         translate([-2.2,-3.05,5])cube([10,6.1,3]);
     }
 }
-
+module bolt(){
+    union(){
+        cylinder(25, 1.8, 1.8);
+        cylinder(3, 3.5, 3.5, $fn=6);
+    }
+}
 
 module stopper(){
     
      difference(){
         union(){
-            translate([0,0,-2])cube([10,10,support_width+4]);
+            translate([0,0,-3])cube([10,10,support_width+6]);
             // fin 1
-            translate([-7,1,-2])cube([7,9,2]);
-            translate([-7,5.5,-2])cylinder(r=4.5, h=2);
+            translate([-7,1,-3])cube([7,9,3]);
+            translate([-7,5.5,-3])cylinder(r=4.5, h=3);
             // fin 2
-            translate([-7,1,support_width])cube([7,9,2]);
-            translate([-7,5.5,support_width])cylinder(r=4.5, h=2);
+            translate([-7,1,support_width])cube([7,9,3]);
+            translate([-7,5.5,support_width])cylinder(r=4.5, h=3);
         }
         union(){
-            rotate([0,0,45])translate([-5,-9,-3])cube([20,10,support_width+6]);
+            rotate([0,0,45])translate([-5,-9,-4])cube([20,10,support_width+8]);
             translate([-19.3,6,-0.1])cylinder(r=20, h=support_width+0.2);
         }
-        translate([-5.25,5.5,-11])nut();
+        //translate([-5.25,5.5,-11])nut();
+        rotate([0,180,0])translate([5.25,5.5,-14])bolt();
         translate([-19,6,-4])cylinder(r=10, h=20);
     }
+    
     
     
 }
