@@ -5,41 +5,28 @@ use <nema.scad>
 
 $fn=100;
 rod_d = 8; // Rod diameter
-
+ang = 45;
 
 module microSwitch(negative){
-/*
 
-        5.82
-  _    |___|
-       /  /| _
- 12.6 /  / | 1 (desde el fondo del switch hasta el centro del hueco)
-  _  /__/ o/
- 6.2 |  |o/|
-  _  |__|/|6.6 (centro a centro de los huecos, equidistantes horizontalmente)
-    
-    o: m2
-    
-*/
-    
     union(){
         difference(){
             union(){
                 if(negative){
-                    translate([7.8,-0.2,0])cube([3.4,15.4,22]);
+                    translate([7.8,-0.5,0])cube([3.4,16,22]);
                 }else{
-                    translate([8,0,0])cube([3,15,20]);
+                    translate([8,-0.3,0])cube([3,15.6,20]);
                 }
-                cube([11,15,8]);
+                translate([0,-0.3,0])cube([11,15.6,8]);
                 
             }
             union(){
-                translate([1.5,1.5,-1])cube([5.82,12.6,12]);
-                translate([-1,6.5,-1])cube([5,2.6,12]);
+                translate([1.4,0.8,-1])cube([6,13.4,12]);
+                translate([-1,6,-1])cube([5,2.6,12]);
             }
         }
-        translate([1.5,4.5,5.2])sphere(r=1, $fn=50);
-        translate([1.5,11.1,5.2])sphere(r=1, $fn=50);
+        translate([1.1,4,5.2])sphere(r=1, $fn=50);
+        translate([1.1,11.1,5.2])sphere(r=1, $fn=50);
     }
 }
 
@@ -55,18 +42,16 @@ module support(){
 }
 
 module fins(fin_h){
-    ang = 45;
     
-    translate([0,0,fin_h])intersection() {
-        cube([5, fin_h, fin_h], center=true);
+    translate([0,2,fin_h])
+        intersection() {
+        cube([5, (fin_h*sin(ang))/cos(ang), fin_h], center=true);
         rotate([ang, 0, 0]) translate([0, -fin_h, 0])cube([20, fin_h*2, fin_h*2], center=true);
     }
 }
 
 
 module rodMounting(rod_h){
-    
-    ang = 45;
     
     union(){
         rotate([ang,0,0])difference(){
@@ -82,8 +67,6 @@ module rodMounting(rod_h){
 
 
 module rodMountingFoot(rod_h){
-    
-    ang = 45;
     
     union(){
         // rods
