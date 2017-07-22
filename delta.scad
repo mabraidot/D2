@@ -116,7 +116,7 @@ module delta(export){
             for(a=[0:2]){
                 difference(){
                     rotate([0,0,(120*a)])translate([-62,-10,0])support();
-                    rotate([45,0,(120*a)+90])translate([10,40,-30])cylinder(r=6, h=40, center=true);    
+                    rotate([ang,0,(120*a)+90])translate([10,40,-30])cylinder(r=6, h=40, center=true);    
                 }
                 
                 //rotate([0,-120,(120*a)+90])translate([11,-8,-40])microSwitch();
@@ -142,7 +142,7 @@ module delta(export){
         union(){
             for(a=[0:2]){
                 rotate([0,-120,(120*a)+90])translate([11,-8,-40])microSwitch(true);
-                
+                // Bottom clamps
                 rotate([0,0,(120*a)+20])translate([25,0,-4])rotate([0,0,90])union(){
                     cube([5,7,10]);
                     translate([0,0,9])cube([5,12,5]);
@@ -150,6 +150,7 @@ module delta(export){
             }
             
         }
+        // Central hole
         union(){
             translate([0,0,26])cylinder(r=4, h=50, center=true);
             translate([0,0,-1])cylinder(r=2.5, h=10, center=true);
