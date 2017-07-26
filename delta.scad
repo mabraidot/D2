@@ -4,7 +4,7 @@ use <motor_end.scad>
 use <nema.scad>
 
 $fn=100;
-rod_d = 10; // Inner rod diameter
+rod_d = 9.6; // Inner rod diameter
 rod_d_o = 14; // Outer rod diameter
 ang = 30;
 
@@ -81,11 +81,11 @@ module rodMountingFoot(rod_h){
     difference(){
         union(){
             // rods
-            translate([0,rod_d_o-1.3,rod_h/2-3.1])rotate([-ang,0,0])
+            translate([0,rod_d_o-1.4,rod_h/2-3.2])rotate([-ang,0,0])
                 cylinder(r=rod_d_o/2, h=rod_h, center=true);
-            translate([rod_d+2.35,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,-30])
+            translate([rod_d+2.85,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,-30])
                 cylinder(r=rod_d_o/2, h=rod_h, center=true);
-            translate([-rod_d-2.35,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,30])
+            translate([-rod_d-2.85,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,30])
                 cylinder(r=rod_d_o/2, h=rod_h, center=true);
             
             //fins
@@ -168,5 +168,5 @@ module delta(export){
 
 
 //microSwitch(false);
-rodMountingFoot(50);
-//delta(true);
+//rodMountingFoot(50);
+delta(true);

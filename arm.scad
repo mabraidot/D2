@@ -82,5 +82,5 @@ module arm(){
     rotate([0,0,-80])translate([20.5,0,0])rotate([0,0,17])stopper();
 }
 
-
+//rotate([-90,0,0])stopper();
 arm();
