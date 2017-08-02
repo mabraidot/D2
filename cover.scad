@@ -40,8 +40,9 @@ module cover(){
         rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
     }
     // ramps
-    translate([0,30,35])rotate([0,0,0])ramps();
-    translate([0,0,130])rotate([0,0,90])psu();
+    %translate([0,20,55])rotate([0,0,10])ramps();
+    //translate([0,0,130])rotate([0,0,90])psu();
+    
 }
 
 
@@ -60,5 +61,5 @@ module psu(){
 
 module ramps(){
     // Downloaded from https://www.thingiverse.com/thing:34174
-    import("../../../Downloads/RAMPS1_4.STL");
+    import("RAMPS1_4.STL");
 }
