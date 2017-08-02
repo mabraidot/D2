@@ -25,7 +25,10 @@ module motorCover(){
             translate([30,24,-40])rotate([60,0,0])cube([20,l+30,l+20], center = true);
             translate([30,21.2,12])cube([20,20,20], center = true);
         }
+        translate([(w/2)-2.98, (l/2)-10.97, 40])cylinder(r=1.9, h=50, center=true, $fn=50);
+        translate([-(w/2)+2.98, (l/2)-10.97, 40])cylinder(r=1.9, h=50, center=true, $fn=50);
     }
+    
 }
 
 
@@ -34,5 +37,6 @@ module cover(){
     for(a=[0:2]){
         rotate([0,0,(120*a)])translate([70,0,0])
         rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
+        
     }
 }

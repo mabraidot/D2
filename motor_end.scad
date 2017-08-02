@@ -56,6 +56,8 @@ module motor_end(holes=true,rightfin=true){
     translate([m/2, 0, -m/2]) rotate([0, 45, 0])cube([9, 40, 3], center=true);
     translate([-m/2, 0, -m/2]) rotate([0, -45, 0])cube([9, 40, 3], center=true);
   }
+  translate([-w/2, 10, 40]) cylinder(r=1.9, h=h+1, center=true);
+  translate([w/2, 10, 40]) cylinder(r=1.9, h=h+1, center=true);
 }
 
 motor_end(true,true);
