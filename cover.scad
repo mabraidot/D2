@@ -1,5 +1,6 @@
 use <delta.scad>
 
+
 cover();
 
 
@@ -37,6 +38,27 @@ module cover(){
     for(a=[0:2]){
         rotate([0,0,(120*a)])translate([70,0,0])
         rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
-        
     }
+    // ramps
+    translate([0,30,35])rotate([0,0,0])ramps();
+    translate([0,0,130])rotate([0,0,90])psu();
+}
+
+
+module psu(){
+    w=150;
+    l=160;
+    h=86;
+    difference(){
+        cube([l,w,h], center=true);
+        translate([0,0,(h/2)-4])cylinder(r=50, h=10, center=true);
+        translate([l/2,22,0])rotate([0,90,0])cylinder(r=20, h=10, center=true);
+        translate([l/2,-22,0])rotate([0,90,0])cylinder(r=20, h=10, center=true);
+    }
+    
+}
+
+module ramps(){
+    // Downloaded from https://www.thingiverse.com/thing:34174
+    import("../../../Downloads/RAMPS1_4.STL");
 }
