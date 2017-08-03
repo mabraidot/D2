@@ -22,6 +22,8 @@ pcb_thickness = 2.1;
 
 // distance from bottom of the fan to PCB. Recommended value for RAMPS fuse clearance: 35mm
 bracket_height = 36;
+bracket_leg_height = 51;
+bracket_clip_height = 10;
 
 // how long the bracket needs to be, typically 10mm for mini brackets, or close to fan size for full brackets
 bracket_length = 12;
@@ -50,10 +52,14 @@ module legs()
             translate([-pcb_width/2 + .5, -bracket_height + 2, 0])
                 rotate([0, 0, 180]) 
                     cylinder(r=2.5, h=bracket_length, $fn=6, center=true);
-
+            
             // left leg
-            translate([-pcb_width/2 - bracket_thickness, -bracket_height + bracket_thickness/2, -bracket_length/2])
-                cube([bracket_thickness, bracket_height, bracket_length]);
+            translate([-pcb_width/2 - bracket_thickness, -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
+                cube([bracket_thickness, bracket_leg_height, bracket_length]);
+
+            translate([-pcb_width/2 - bracket_thickness, -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
+                rotate([0,0,90])
+                    cube([bracket_thickness, bracket_clip_height, bracket_length]);
 
 
             // right clip
@@ -62,19 +68,34 @@ module legs()
                      cylinder(r=2.5, h=bracket_length, $fn=6, center=true);
 
             // right leg
-            translate([pcb_width/2 , -bracket_height + bracket_thickness/2, -bracket_length/2])
-                cube([bracket_thickness, bracket_height, bracket_length]);
+            translate([pcb_width/2 , -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
+                cube([bracket_thickness, bracket_leg_height, bracket_length]);
+              
+            translate([pcb_width/2+bracket_thickness+bracket_clip_height, -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
+                rotate([0,0,90])
+                    cube([bracket_thickness, bracket_clip_height, bracket_length]);
+
 
         }
-
+        
         // left cutout
        translate([-pcb_width/2 + .5, -bracket_height + 2, 0])
             rotate([0, 0, 180]) 
                 cylinder(r=1.2, h=bracket_length + 0.1, $fn=6, center=true);
+        
+        // cutout leg clip
+        translate([-pcb_width/2 - bracket_thickness - bracket_clip_height/2, -bracket_leg_height, 0])
+        rotate([90,0,0])    
+            cylinder(r=screw_diameter/2, h=bracket_height, $fn=20, center=true);
 
         // right cutout
        translate([pcb_width/2 - .5, -bracket_height + 2, 0])
             cylinder(r=1.2, h=bracket_length + 0.1, $fn=6, center=true);
+        
+        // cutout leg clip
+        translate([pcb_width/2 + bracket_thickness + bracket_clip_height/2, -bracket_leg_height, 0])
+        rotate([90,0,0])    
+            cylinder(r=screw_diameter/2, h=bracket_height, $fn=20, center=true); 
 
         // PCB lips clearance
         translate([0, -bracket_height + bracket_thickness + -.5,0])
@@ -85,7 +106,7 @@ module legs()
             cube([pcb_width, pcb_thickness, bracket_length + 0.1], center=true);
 
     }
-
+    
 }
 
 module fan_mask()
