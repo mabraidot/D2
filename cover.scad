@@ -1,5 +1,5 @@
 use <delta.scad>
-
+use <moab.scad>
 
 cover();
 
@@ -41,7 +41,7 @@ module cover(){
     }
     // ramps
     translate([0,30,35])rotate([0,0,0])ramps();
-    translate([0,0,130])rotate([0,0,90])psu();
+    //translate([0,0,130])rotate([0,0,90])psu();
 }
 
 
@@ -59,6 +59,15 @@ module psu(){
 }
 
 module ramps(){
-    // Downloaded from https://www.thingiverse.com/thing:34174
-    import("../../../Downloads/RAMPS1_4.STL");
+    //fan
+    //%translate([-23,-40,50])cube([40,40,10]);
+    
+    // brackets
+    h = 49.5;
+    l = -17.7;
+    translate([-20,l,h])rotate([90,0,90])bracket();
+    translate([14,l,h])rotate([90,0,-90])bracket();
+    
+    // RAMPS, Downloaded from https://www.thingiverse.com/thing:34174
+    color("yellow")import("RAMPS1_4.STL");
 }
