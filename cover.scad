@@ -40,9 +40,22 @@ module cover(){
         rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
     }
     // ramps
-    translate([0,30,40])rotate([0,0,0])ramps();
-    //translate([0,0,130])rotate([0,0,90])psu();
-
+    //translate([0,30,35])rotate([0,0,0])ramps();
+    
+    fn = 0;
+    
+    difference(){
+        union(){
+            translate([0,0,57])cylinder(r=90,h=60,center=true, $fn=fn);
+            translate([0,0,20])intersection(){
+                translate([0,0,70])cylinder(r=90,h=100,center=true, $fn=fn);
+                sphere(r=120, center=true, $fn=fn);
+            }
+        }
+        for(a=[0:2]){
+            rotate([20,40,(120*a)])translate([30,-10,70])cylinder(r=30,h=120,center=true, $fn=8);
+        }
+    }
 }
 
 
@@ -66,8 +79,15 @@ module ramps(){
     // brackets
     h = 49.5;
     l = -17.7;
-    translate([-20,l,h])rotate([90,0,90])bracket();
-    translate([14,l,h])rotate([90,0,-90])bracket();
+    translate([-15,l,h])rotate([90,0,90])bracket();
+    translate([19,l,h])rotate([90,0,-90])bracket();
+    
+    hs = 5;
+    union(){
+        translate([-25,-61.7,-hs])rotate([0,0,0])cube([55,10,hs]);
+        translate([-60.4,-87.6,-hs])cylinder(r=5,h=hs, $fn=50);
+        translate([-58,-92,-hs])rotate([0,0,30])cube([61,10,hs]);
+    }
     
     // RAMPS, Downloaded from https://www.thingiverse.com/thing:34174
     import("RAMPS1_4.STL");
