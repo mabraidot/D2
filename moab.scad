@@ -114,6 +114,7 @@ module legs()
 
 module fan_mask()
 {
+    nut_width = 3;
     // M3 screw
     translate([-fan_hole_spacing/2, -fan_hole_spacing/2, 0])
         cylinder(r=screw_diameter/2, h=bracket_height, $fn=20, center=true);
@@ -124,15 +125,25 @@ module fan_mask()
     translate([fan_hole_spacing/2, fan_hole_spacing/2, 0])
         cylinder(r=screw_diameter/2, h=bracket_height, $fn=20, center=true);
 
+    // nut traps
+    translate([(-fan_hole_spacing/2)+1.44, (-fan_hole_spacing/2)+2.5, 0])
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
+    translate([(fan_hole_spacing/2)-1.44, (-fan_hole_spacing/2)+2.5, 0])
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
+    translate([(-fan_hole_spacing/2)+1.44, (fan_hole_spacing/2)-2.5, 0])
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
+    translate([(fan_hole_spacing/2)-1.44, (fan_hole_spacing/2)-2.5, 0])
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
+    
     // M3 nuts
     translate([-fan_hole_spacing/2, -fan_hole_spacing/2, 0])
-        cylinder(r=screw_diameter, h=4, $fn=6, center=true);
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
     translate([fan_hole_spacing/2, -fan_hole_spacing/2, 0])
-        cylinder(r=screw_diameter, h=4, $fn=6, center=true);
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
     translate([-fan_hole_spacing/2, fan_hole_spacing/2, 0])
-        cylinder(r=screw_diameter, h=4, $fn=6, center=true);
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
     translate([fan_hole_spacing/2, fan_hole_spacing/2, 0])
-        cylinder(r=screw_diameter, h=4, $fn=6, center=true);
+        cylinder(r=screw_diameter, h=nut_width, $fn=6, center=true);
 
     // fan blade clearance
     difference() {
@@ -153,6 +164,12 @@ module bracket()
             translate([0, 0, 0])
                 cube([bracket_width + 2*bracket_thickness, bracket_thickness, bracket_length], center=true);
 
+            // captive nuts
+            translate([16, -3, 0])
+                cube([10, bracket_thickness+2, 12], center=true);
+            translate([-16, -3, 0])
+                cube([10, bracket_thickness+2, 12], center=true);
+            
             // extra strength 
             translate([0, -cross_bracket/2, -bracket_length/2 + bracket_thickness/4])
                 cube([pcb_width + 1, cross_bracket, bracket_thickness/2], center=true);
@@ -161,7 +178,7 @@ module bracket()
         }
 
 
-        translate([0, -bracket_thickness, -bracket_length/2 + fan_size/2 + bracket_thickness/2])
+        translate([0, -bracket_thickness+0.5, -bracket_length/2 + fan_size/2 + bracket_thickness/2])
         rotate([90,0,0])
             fan_mask();
 
