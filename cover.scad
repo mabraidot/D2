@@ -6,16 +6,15 @@ cover();
 
 
 module cover(){
-    %rotate([0,0,2])union(){
+    /*%rotate([0,0,2])union(){
         translate([0,0,-26.25])delta(false);
         for(a=[0:2]){
             rotate([0,0,(120*a)])translate([70,0,0])
             rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
         }
-    }
+    }*/
     // ramps
-    translate([3,19,40])rotate([0,0,-30])ramps();
-    
+    translate([2,20,40])rotate([0,0,-30])ramps();
     
     
     fn = 0;
@@ -44,12 +43,12 @@ module cover(){
         }
         
         for(a=[0:2]){
-            rotate([0,20,(120*a)-30])translate([50,3,70])cylinder(r=20,h=140,center=true, $fn=80);
+            rotate([0,20,(120*a)-30])translate([50,3,70])cylinder(r=20,h=140,center=true, $fn=fn);
             rotate([0,20,(120*a)-30])translate([70,3,70])cube([40,40,100], center=true);
         }
         
         // fan hole
-        translate([0,0,60])cylinder(r=20, h=120, center=true);
+        translate([0,0,60])cylinder(r=19, h=120, center=true);
         translate([0,0,115])cube([140,140,20], center=true);
         
         // side cutouts
@@ -67,7 +66,7 @@ module cover(){
                 }
             }
             for(a=[0:2]){
-                rotate([0,10,(120*a)-30])translate([60,3,70])cylinder(r=24,h=100,center=true, $fn=80);
+                rotate([0,10,(120*a)-30])translate([60,3,70])cylinder(r=24,h=100,center=true, $fn=fn);
                 rotate([0,10,(120*a)-30])translate([82,3,70])cube([48,48,100], center=true);
             }
             translate([0,0,111])cube([140,140,20], center=true);
@@ -83,10 +82,19 @@ module cover(){
             rotate([0,0,-30])translate([-65,-17.5,60])cube([20,30,16], center=true);
         }
         
-        // mounting
+        // motor mounting
         for(a=[0:2]){
             rotate([0,0,(120*a)])translate([80,-20,40])cylinder(r=4, h=30, $fn=50, center=true);
         }
+        
+        // fan mountings
+        union(){
+            rotate([0,0,-30])translate([16,16,100])cylinder(r=1.7, h=40, center=true, $fn=30);
+            rotate([0,0,-30])translate([-16,16,100])cylinder(r=1.7, h=40, center=true, $fn=30);
+            rotate([0,0,-30])translate([-16,-16,100])cylinder(r=1.7, h=40, center=true, $fn=30);
+            rotate([0,0,-30])translate([16,-16,100])cylinder(r=1.7, h=40, center=true, $fn=30);
+        }
+        
         
     }
     
@@ -144,7 +152,7 @@ module ramps(){
     // brackets
     h = 49.5;
     l = -17.7;
-    translate([-10,l,h])rotate([90,0,90])bracket();
+    translate([-7,l,h])rotate([90,0,90])bracket();
     translate([24,l,h])rotate([90,0,-90])bracket();
     
     /*hs = 5;
