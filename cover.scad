@@ -5,6 +5,67 @@ cover();
 
 
 
+module cover(){
+    /*%translate([0,0,-26.25])delta(false);
+    for(a=[0:2]){
+        rotate([0,0,(120*a)])translate([70,0,0])
+        rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
+    }*/
+    
+    // ramps
+    translate([3,19,40])rotate([0,0,-30])ramps();
+    
+    fn = 100;
+    
+    %difference(){
+        union(){
+            translate([0,0,47])cylinder(r=90,h=40,center=true, $fn=fn);
+            translate([0,0,-11])intersection(){
+                translate([0,0,127])cylinder(r=90,h=100,center=true, $fn=fn);
+                sphere(r=120, center=true, $fn=fn);
+            }
+        }
+        
+        for(a=[0:2]){
+            rotate([0,20,(120*a)-30])translate([50,3,70])cylinder(r=20,h=140,center=true, $fn=80);
+            rotate([0,20,(120*a)-30])translate([70,3,70])cube([40,40,100], center=true);
+        }
+        
+        // fan hole
+        translate([0,0,60])cylinder(r=20, h=120, center=true);
+        translate([0,0,115])cube([140,140,20], center=true);
+        
+        // side cutouts
+        for(a=[0:2]){
+            rotate([0,0,(120*a)])translate([140,90,50])sphere(r=100,center=true, $fn=fn);
+        }
+        
+        // inner cutout
+        difference(){
+            union(){
+                translate([0,0,42])cylinder(r=86,h=50,center=true, $fn=fn);
+                translate([0,0,-11])intersection(){
+                    translate([0,0,127])cylinder(r=86,h=100,center=true, $fn=fn);
+                    sphere(r=116, center=true, $fn=fn);
+                }
+            }
+            for(a=[0:2]){
+                rotate([0,10,(120*a)-30])translate([60,3,70])cylinder(r=24,h=100,center=true, $fn=80);
+                rotate([0,10,(120*a)-30])translate([82,3,70])cube([48,48,100], center=true);
+            }
+            translate([0,0,111])cube([140,140,20], center=true);
+            
+            for(a=[0:2]){
+                rotate([0,0,(120*a)])translate([140,90,50])sphere(r=104,center=true, $fn=fn);
+            }
+        }
+        
+    }
+    
+        
+}
+
+
 module motorCover(){
     
    roundness = 4;
@@ -33,30 +94,7 @@ module motorCover(){
 }
 
 
-module cover(){
-    %translate([0,0,-26.25])delta(false);
-    for(a=[0:2]){
-        rotate([0,0,(120*a)])translate([70,0,0])
-        rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
-    }
-    // ramps
-    //translate([0,30,35])rotate([0,0,0])ramps();
-    
-    fn = 0;
-    
-    difference(){
-        union(){
-            translate([0,0,57])cylinder(r=90,h=60,center=true, $fn=fn);
-            translate([0,0,20])intersection(){
-                translate([0,0,70])cylinder(r=90,h=100,center=true, $fn=fn);
-                sphere(r=120, center=true, $fn=fn);
-            }
-        }
-        for(a=[0:2]){
-            rotate([20,40,(120*a)])translate([30,-10,70])cylinder(r=30,h=120,center=true, $fn=8);
-        }
-    }
-}
+
 
 
 module psu(){
@@ -79,15 +117,15 @@ module ramps(){
     // brackets
     h = 49.5;
     l = -17.7;
-    translate([-15,l,h])rotate([90,0,90])bracket();
-    translate([19,l,h])rotate([90,0,-90])bracket();
+    translate([-10,l,h])rotate([90,0,90])bracket();
+    translate([24,l,h])rotate([90,0,-90])bracket();
     
-    hs = 5;
+    /*hs = 5;
     union(){
         translate([-25,-61.7,-hs])rotate([0,0,0])cube([55,10,hs]);
         translate([-60.4,-87.6,-hs])cylinder(r=5,h=hs, $fn=50);
         translate([-58,-92,-hs])rotate([0,0,30])cube([61,10,hs]);
-    }
+    }*/
     
     // RAMPS, Downloaded from https://www.thingiverse.com/thing:34174
     import("RAMPS1_4.STL");

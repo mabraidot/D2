@@ -22,8 +22,9 @@ pcb_thickness = 2.1;
 
 // distance from bottom of the fan to PCB. Recommended value for RAMPS fuse clearance: 35mm
 bracket_height = 36;
-bracket_leg_height = 51;
+bracket_leg_height = bracket_height;//51;
 bracket_clip_height = 10;
+leg_mounting = false;
 
 // how long the bracket needs to be, typically 10mm for mini brackets, or close to fan size for full brackets
 bracket_length = 12;
@@ -32,7 +33,7 @@ bracket_length = 12;
 bracket_thickness = 3.0;
 
 // how tall is the cross brace that addds additional strength to the bracket, set to 0 to not have one
-cross_bracket = 10;
+cross_bracket = 7;
 
 /* [Hidden] */
 
@@ -57,10 +58,11 @@ module legs()
             translate([-pcb_width/2 - bracket_thickness, -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
                 cube([bracket_thickness, bracket_leg_height, bracket_length]);
 
+            if(leg_mounting){
             translate([-pcb_width/2 - bracket_thickness, -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
                 rotate([0,0,90])
                     cube([bracket_thickness, bracket_clip_height, bracket_length]);
-
+            }
 
             // right clip
             translate([pcb_width/2 - .5, -bracket_height + 2, 0])
@@ -71,10 +73,11 @@ module legs()
             translate([pcb_width/2 , -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
                 cube([bracket_thickness, bracket_leg_height, bracket_length]);
               
+            if(leg_mounting){
             translate([pcb_width/2+bracket_thickness+bracket_clip_height, -bracket_leg_height + bracket_thickness/2, -bracket_length/2])
                 rotate([0,0,90])
                     cube([bracket_thickness, bracket_clip_height, bracket_length]);
-
+            }
 
         }
         
