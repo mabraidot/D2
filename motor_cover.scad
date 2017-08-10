@@ -2,8 +2,8 @@ use <delta.scad>
 use <cover.scad>
 
 
-//translate([0,0,26.7])rotate([0,180,0])motorCover();
-assembly();
+translate([0,0,26.7])rotate([0,180,0])motorCover();
+//assembly();
 
 module assembly(){
     cover();
@@ -40,7 +40,7 @@ module motorCover(){
             translate([0,roundness/2,-roundness+4])cube([w+4, l+roundness+4, h+roundness-4], center=true);
             translate([0,roundness/2,-roundness+4])intersection(){
                 cube([w+10,l*3,h], center=true);
-                translate([0,-h/2,h/2])rotate([0,90,0])cylinder(r=h+4, h=w+4, center=true, $fn=fn);
+                translate([0,-h/2,h/2])rotate([0,90,0])cylinder(r=h+3, h=w+4, center=true, $fn=fn);
             }
         
             translate([0,40.9,0])cube([l+20,30,l+20], center = true);
