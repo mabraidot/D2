@@ -6,18 +6,35 @@ cover();
 
 
 module cover(){
-    /*%translate([0,0,-26.25])delta(false);
-    for(a=[0:2]){
-        rotate([0,0,(120*a)])translate([70,0,0])
-        rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
-    }*/
-    
+    %rotate([0,0,2])union(){
+        translate([0,0,-26.25])delta(false);
+        for(a=[0:2]){
+            rotate([0,0,(120*a)])translate([70,0,0])
+            rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
+        }
+    }
     // ramps
     translate([3,19,40])rotate([0,0,-30])ramps();
     
-    fn = 100;
     
-    %difference(){
+    
+    fn = 0;
+    
+    difference(){
+        union(){
+            for(a=[0:2]){
+                rotate([0,0,(120*a)])translate([80,-20,42])cylinder(r=7.2, h=30, $fn=50, center=true);
+            }
+        }
+        union(){
+            for(a=[0:2]){
+                rotate([0,0,(120*a)])translate([80,-20,30])cylinder(r=1.7, h=15, $fn=50, center=true);
+                rotate([0,0,(120*a)-30])translate([80,20,46])cube([20,13,26], center=true);
+                rotate([0,0,(120*a)-30])translate([80,11,30])cube([20,13,26], center=true);
+            }
+        }
+    }
+    difference(){
         union(){
             translate([0,0,47])cylinder(r=90,h=40,center=true, $fn=fn);
             translate([0,0,-11])intersection(){
@@ -37,7 +54,7 @@ module cover(){
         
         // side cutouts
         for(a=[0:2]){
-            rotate([0,0,(120*a)])translate([140,90,50])sphere(r=100,center=true, $fn=fn);
+            rotate([0,0,(120*a)])translate([150,100,50])sphere(r=120,center=true, $fn=fn);
         }
         
         // inner cutout
@@ -54,15 +71,25 @@ module cover(){
                 rotate([0,10,(120*a)-30])translate([82,3,70])cube([48,48,100], center=true);
             }
             translate([0,0,111])cube([140,140,20], center=true);
-            
+            // side cutouts
             for(a=[0:2]){
-                rotate([0,0,(120*a)])translate([140,90,50])sphere(r=104,center=true, $fn=fn);
+                rotate([0,0,(120*a)])translate([150,100,50])sphere(r=124,center=true, $fn=fn);
             }
+        }
+        
+        // ramps connections.
+        union(){
+            rotate([0,0,-30])translate([-65,0,50])cube([20,65,18], center=true);
+            rotate([0,0,-30])translate([-65,-17.5,60])cube([20,30,16], center=true);
+        }
+        
+        // mounting
+        for(a=[0:2]){
+            rotate([0,0,(120*a)])translate([80,-20,40])cylinder(r=4, h=30, $fn=50, center=true);
         }
         
     }
     
-        
 }
 
 
