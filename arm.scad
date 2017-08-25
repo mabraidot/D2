@@ -45,7 +45,7 @@ module stopper(){
 
 module arm(){
     
-    
+    translate([0,0,10])rotate([0,0,-120])import("../../../Downloads/3D0002b.stl");
     difference(){
         union(){
             difference(){
