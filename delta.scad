@@ -112,7 +112,7 @@ module rodMountingFoot(rod_h){
 
 module delta(export){
     
-    arm_angle = 60;
+    arm_angle = 80;
     difference(){
         union(){
             // Center spheric support
