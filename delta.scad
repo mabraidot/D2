@@ -142,7 +142,8 @@ module delta(export){
                 // Motor and arm
                 if(!export){
                     rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
-                    rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
+                    //rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
+                    rotate([0,90,120*a])translate([40,70,16])rotate([0,180,arm_angle])arm();
                 }
                 
             }
@@ -169,4 +170,4 @@ module delta(export){
 
 //microSwitch(false);
 //rodMountingFoot(50);
-delta(true);
+delta(false);
