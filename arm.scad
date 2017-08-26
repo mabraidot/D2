@@ -78,7 +78,7 @@ module arm(){
     }
     
     //rotate([0,0,-80])translate([20.5,0,0])rotate([0,0,17])stopper();
-    translate([0,0,10])rotate([0,0,-120])import("3D0002ba_pulley.stl");
+    translate([0,0,22])rotate([0,180,-120])import("3D0002ba_pulley.stl");
     
     
     
