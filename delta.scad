@@ -1,4 +1,5 @@
 use <arm.scad>
+use <fins.scad>
 use <motor_end.scad>
 
 use <nema.scad>
@@ -42,22 +43,6 @@ module support(){
     }
 }
 
-module fins(fin_h, triangle=false){
-    
-    if(triangle){
-        difference() {
-            cube([3, ((fin_h*sin(ang))/cos(ang))*2, fin_h], center=true);
-            rotate([ang, 0, 0]) translate([0, -fin_h-5, 0])cube([20, fin_h*2, fin_h*2], center=true);
-            rotate([-ang, 0, 0]) translate([0, fin_h+5, 0])cube([20, fin_h*2, fin_h*2], center=true);
-        }
-    }else{
-        translate([0,2,fin_h])
-        intersection() {
-            cube([5, (fin_h*sin(ang))/cos(ang), fin_h], center=true);
-            rotate([ang, 0, 0]) translate([0, -fin_h, 0])cube([20, fin_h*2, fin_h*2], center=true);
-        }
-    }
-}
 
 
 module rodMounting(rod_h){
@@ -75,38 +60,24 @@ module rodMounting(rod_h){
 }
 
 
-module rodMountingFoot(rod_h){
-    
-    union(){    
-    difference(){
-        union(){
-            // rods
-            translate([0,rod_d_o-1.4,rod_h/2-3.2])rotate([-ang,0,0])
-                cylinder(r=rod_d_o/2, h=rod_h, center=true);
-            translate([rod_d+2.85,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,-30])
-                cylinder(r=rod_d_o/2, h=rod_h, center=true);
-            translate([-rod_d-2.85,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,30])
-                cylinder(r=rod_d_o/2, h=rod_h, center=true);
-            
-            //fins
-            translate([-8.6,32,-(rod_d_o/2)+1.5])rotate([0,90,-30])fins(40, true);
-            translate([14,30,10.5])rotate([63,-15,-30])fins(40, true);
-            translate([-14,30,10.5])rotate([63,15,30])fins(40, true);
+
+module bearing_clamp(){
+    union(){
+        difference(){
+            cylinder(8, 15, 15);
+            translate([0,0,-0.5])cylinder(9, 10.92, 10.92);
+            translate([-3,10,-0.5])cube([6,5,9]);
         }
-        union(){
-            translate([0,rod_d_o-1.3,rod_h/2-3.1])rotate([-ang,0,0])
-                translate([0,0,-1])cylinder(r=rod_d/2, h=rod_h+5, center=true);
-            translate([rod_d+2.35,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,-30])
-                translate([0,0,-1])cylinder(r=rod_d/2, h=rod_h+5, center=true);
-            translate([-rod_d-2.35,(rod_h/2)-(rod_d/2)+1.4,0])rotate([90,0,30])
-                translate([0,0,-1])cylinder(r=rod_d/2, h=rod_h+5, center=true);
+        difference(){
+            union(){
+                translate([3,12,0])cube([4,11,8]);
+                translate([-7,12,0])cube([4,11,8]);
+            }
+            rotate([0,90,0])translate([-4,18,-8.5])rotate([0,0,90])bolt();
         }
     }
-    // elbow
-    sphere(r=rod_d_o/2, center=true);
-    }
-        
 }
+
 
 
 
@@ -168,6 +139,7 @@ module delta(export){
 }
 
 
+
+//bearing_clamp();
 //microSwitch(false);
-//rodMountingFoot(50);
 delta(false);
