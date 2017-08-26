@@ -42,10 +42,8 @@ module stopper(){
     
 }
 
-
 module arm(){
     
-    translate([0,0,16])rotate([0,0,-120])import("3D0002b.stl");
     difference(){
         union(){
             difference(){
@@ -79,7 +77,11 @@ module arm(){
         
     }
     
-    rotate([0,0,-80])translate([20.5,0,0])rotate([0,0,17])stopper();
+    //rotate([0,0,-80])translate([20.5,0,0])rotate([0,0,17])stopper();
+    translate([0,0,10])rotate([0,0,-120])import("3D0002ba_pulley.stl");
+    
+    
+    
 }
 
 //rotate([-90,0,0])stopper();

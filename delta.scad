@@ -206,9 +206,35 @@ module delta(export){
     }
 }
 
+module bushings(){
+    
+    //washer
+    translate([5,12,0])difference(){
+        cylinder(h=1,r=6, center=true);
+        cylinder(h=16,r=1.7, center=true);
+    }
+    
+    //nut
+    difference(){
+        translate([0,0,-3])sphere(r=5);
+        union(){
+            cylinder(r=1.7, h=40, center=true);
+            translate([0,0,-5.5])cube([10,10,10], center=true);
+        }
+    }
+    
+    // bushing
+    translate([12,0,4])difference(){
+        union(){
+            translate([0,0,-4])cylinder(h=1,r=6, center=true);
+            cylinder(h=7,r=4.04, center=true);
+        }
+        cylinder(h=16,r=1.7, center=true);
+    }
+}
 
-
-//bearing_clamp();
+//bushings();
 //microSwitch(false);
-microSwitchHolder();
+//microSwitchHolder();
+shoulder();
 //delta(false);
