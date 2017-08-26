@@ -4,19 +4,19 @@ use <motor_cover.scad>
 
 cover();
 
-
-
 module cover(){
-    /*%rotate([0,0,2])union(){
-        //translate([0,0,-26.25])delta(false);
+    
+    rotate([0,0,2])union(){
+        translate([0,0,-26.25])delta(false);
         for(a=[0:2]){
             rotate([0,0,(120*a)])translate([70,0,0])
             rotate([0,0,150])translate([10.6,-1.78-4,0])motorCover();
+            rotate([0,0,(120*a)])translate([22,75,27])rotate([90,0,0])microSwitchHolder();
         }
     }
     // ramps
-    translate([2,20,40])rotate([0,0,-30])ramps();
-    */
+    //translate([2,20,40])rotate([0,0,-30])ramps();
+    
     
     fn = 12;
     

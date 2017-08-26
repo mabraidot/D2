@@ -9,15 +9,17 @@ rod_d = 9.6; // Inner rod diameter
 rod_d_o = 14; // Outer rod diameter
 ang = 30;
 
-module microSwitch(negative){
+module microSwitch(negative=false, holderOnly=false){
 
     union(){
         difference(){
             union(){
-                if(negative){
-                    translate([7.8,-0.5,0])cube([3.4,16,22]);
-                }else{
-                    translate([8,-0.3,0])cube([3,15.6,20]);
+                if(!holderOnly){
+                    if(negative){
+                        translate([7.8,-0.5,0])cube([3.4,16,22]);
+                    }else{
+                        translate([8,-0.3,0])cube([3,15.6,20]);
+                    }
                 }
                 translate([0,-0.3,0])cube([11,15.6,8]);
                 
@@ -32,6 +34,33 @@ module microSwitch(negative){
     }
 }
 
+module microSwitchHolder(){
+    height = 8;
+    difference(){
+        union(){
+            cylinder(r=5, h=height, center=true);
+            translate([0,10,0])cube([10,20,height], center=true);
+            
+            //translate([-15.5,4.5,0])rotate([0,0,90])cube([10,25,height], center=true);
+        }
+        union(){
+            translate([0,5,0])cylinder(r=2.4, h=height+2, center=true);
+            translate([0,10,0])cylinder(r=2.4, h=height+2, center=true);
+            translate([0,15,0])cylinder(r=2.4, h=height+2, center=true);
+            
+            cylinder(r=2.6, h=height+2, center=true);
+            translate([0,10,0])cube([4.2,21,height+2], center=true);
+            
+            //translate([-7,4.5,0])cylinder(r=2.8, h=20, center=true);
+            //translate([-20.5,4.5,0])rotate([0,0,90])cube([3.2,25,20], center=true);
+            
+            // shorter leg
+            translate([-5,20,0])cube([25,12,20], center=true);
+        }
+    }
+    
+    translate([-20,14,-4])rotate([0,0,-90])microSwitch(0, 1);
+}
 
 module support(){
     union(){
@@ -143,7 +172,6 @@ module delta(export){
                 rotate([0,0,(120*a)+90])translate([50,10,5])motor_end(false, false);
                 
                 // Rod support
-                //rotate([0,0,(120*a)+60])translate([-19,60,23.3])rodMounting();
                 difference(){
                     rotate([0,0,(120*a)+90])translate([10,40,15])rodMounting(60);
                     rotate([0,0,(120*a)+90])translate([-5,10,-15])cube([35,60,15]);
@@ -153,7 +181,7 @@ module delta(export){
                 // Motor and arm
                 if(!export){
                     rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
-                    //rotate([0,90,120*a])translate([40,70,16])rotate([0,180,arm_angle])arm();
+                    rotate([0,90,120*a])translate([40,70,16])rotate([0,180,arm_angle])arm();
                     rotate([0,90,120*a])translate([40,70,-8])rotate([0,180,-90])shoulder();
                 }
                 
@@ -182,4 +210,5 @@ module delta(export){
 
 //bearing_clamp();
 //microSwitch(false);
-delta(false);
+microSwitchHolder();
+//delta(false);
