@@ -61,23 +61,63 @@ module rodMounting(rod_h){
 
 
 
-module bearing_clamp(){
+module bearing_clamp(bh=10){
+    
     union(){
         difference(){
-            cylinder(8, 15, 15);
-            translate([0,0,-0.5])cylinder(9, 10.92, 10.92);
-            translate([-3,10,-0.5])cube([6,5,9]);
+            cylinder(bh, 15, 15);
+            translate([0,0,-0.5])cylinder(bh+1, 10.92, 10.92);
+            translate([-3,10,-0.5])cube([6,5,bh+1]);
         }
         difference(){
             union(){
-                translate([3,12,0])cube([4,11,8]);
-                translate([-7,12,0])cube([4,11,8]);
+                translate([3,12,0])cube([4,11,bh]);
+                translate([-7,12,0])cube([4,11,bh]);
             }
-            rotate([0,90,0])translate([-4,18,-8.5])rotate([0,0,90])bolt();
+            rotate([0,90,0])translate([-(bh/2),18,-8.5])rotate([0,0,90])bolt();
         }
     }
 }
 
+module shoulder(){
+    height = 12;
+    bearing_clamp(height);
+    difference(){
+        translate([-7.5,-40,0])cube([15,27,height]);
+        
+        translate([-5,-38,3])intersection(){
+            cube([10,20,12]);
+            translate([-5,-14,0])rotate([0,0,45])cube([20,20,12]);
+        }
+        translate([-5,-35,3])intersection(){
+            cube([10,20,12]);
+            translate([15,-5,0])rotate([0,0,45])cube([20,20,12]);
+        }
+        translate([-5,-14,3])rotate([0,0,-90])intersection(){
+            cube([10,20,12]);
+            translate([-5,-14,0])rotate([0,0,45])cube([20,20,12]);
+        }
+    }
+    
+    difference(){
+        translate([-48,-89,0])cube([55.5,49,7]);
+        translate([-20,-67,0])rotate([90,0,0])union(){
+            m = 29; // Motor mounting screws distance (center to center)
+            // Motor shaft
+            rotate([90, 0, 0]) cylinder(r=12, h=40, center=true);
+            // Motor mounting screw slots
+            translate([m/2, 0, m/2]) rotate([0, -45, 0])cube([9, 40, 3], center=true);
+            translate([-m/2, 0, m/2]) rotate([0, 45, 0])cube([9, 40, 3], center=true);
+            translate([m/2, 0, -m/2]) rotate([0, 45, 0])cube([9, 40, 3], center=true);
+            
+            translate([m/2, 0, m/2]) rotate([0, -45, 0])cube([15, 8, 10], center=true);
+            translate([-m/2, 0, m/2]) rotate([0, 45, 0])cube([15, 8, 10], center=true);
+            translate([m/2, 0, -m/2]) rotate([0, 45, 0])cube([15, 8, 10], center=true);
+            
+        }
+        translate([-57.5,-90,-1])rotate([0,0,45])cube([71,30,10]);
+    }
+}
 
 
 
@@ -113,8 +153,8 @@ module delta(export){
                 // Motor and arm
                 if(!export){
                     rotate([0,0,(120*a)+30])translate([-50,-3,27])nema17(48);
-                    //rotate([0,90,120*a])translate([-27,50,5])rotate([0,180,arm_angle])arm();
-                    rotate([0,90,120*a])translate([40,70,16])rotate([0,180,arm_angle])arm();
+                    //rotate([0,90,120*a])translate([40,70,16])rotate([0,180,arm_angle])arm();
+                    rotate([0,90,120*a])translate([40,70,-8])rotate([0,180,-90])shoulder();
                 }
                 
             }
