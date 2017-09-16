@@ -2,10 +2,11 @@ use <delta.scad>
 use <moab.scad>
 use <motor_cover.scad>
 
-cover();
+cover(false);
 
-module cover(){
+module cover(export){
     
+    if(!export){
     rotate([0,0,2])union(){
         translate([0,0,-26.25])delta(false);
         for(a=[0:2]){
@@ -16,7 +17,7 @@ module cover(){
     }
     // ramps
     //translate([2,20,40])rotate([0,0,-30])ramps();
-    
+    }
     
     fn = 12;
     

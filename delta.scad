@@ -41,7 +41,8 @@ module microSwitchHolder(){
             cylinder(r=5, h=height, center=true);
             translate([0,10,0])cube([10,20,height], center=true);
             
-            //translate([-15.5,4.5,0])rotate([0,0,90])cube([10,25,height], center=true);
+            translate([-6,2,0])cube([6,8,height], center=true);
+            translate([-20,16,-4])rotate([0,0,-90])microSwitch(0, 1);
         }
         union(){
             translate([0,5,0])cylinder(r=2.4, h=height+2, center=true);
@@ -49,18 +50,24 @@ module microSwitchHolder(){
             translate([0,15,0])cylinder(r=2.4, h=height+2, center=true);
             
             cylinder(r=2.6, h=height+2, center=true);
-            translate([0,10,0])cube([4.2,21,height+2], center=true);
-            
-            //translate([-7,4.5,0])cylinder(r=2.8, h=20, center=true);
-            //translate([-20.5,4.5,0])rotate([0,0,90])cube([3.2,25,20], center=true);
+            translate([0,10,0])cube([4,21,height+2], center=true);
+            translate([-13,3,-1])rotate([0,90,0])nut();
             
             // shorter leg
-            translate([-5,20,0])cube([25,12,20], center=true);
+            //translate([-5,22,0])cube([25,12,20], center=true);
         }
     }
     
-    translate([-20,14,-4])rotate([0,0,-90])microSwitch(0, 1);
 }
+
+module nut(){
+    union(){
+        cylinder(25, 1.7, 1.7);
+        translate([-0.5,0,5])cylinder(3, 3.5, 3.5, $fn=6);
+        translate([-2.2,-3.05,5])cube([10,6.1,3]);
+    }
+}
+
 
 module support(){
     union(){
@@ -236,5 +243,5 @@ module bushings(){
 //bushings();
 //microSwitch(false);
 //microSwitchHolder();
-shoulder();
-//delta(false);
+//shoulder();
+delta(false);
