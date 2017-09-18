@@ -36,19 +36,19 @@ module electromagnet_bottom(){
         union(){
             translate([0,0,1])cylinder(r=19, h=2, $fn=100, center=true);
             translate([0,0,4])cube([13,8,8], center=true);
-            translate([0,0,3])cube([13,20,6], center=true);
+            translate([0,0,3])cube([13,22,6], center=true);
         }
-        translate([0,0,4])cube([10.4,5.2,10], center=true);
-        translate([0,6,-3])rotate([0,0,0])nut();
-        translate([0,-6,-3])rotate([0,0,0])nut();
+        translate([0,0,4])cube([10.8,5.6,10], center=true);
+        translate([0,6.2,-3])rotate([0,0,0])nut();
+        translate([0,-6.2,-3])rotate([0,0,0])nut();
     }
 }
 
 module nut(){
     union(){
         cylinder(35, 1.7, 1.7, $fn=30);
-        translate([-0.5,0,5])cylinder(3, 3.5, 3.5, $fn=6);
-        translate([-2.2,-3.05,5])cube([10,6.1,3]);
+        translate([-0.5,0,5])cylinder(3, 3.7, 3.7, $fn=6);
+        translate([-2.2,-3.20,5])cube([10,6.4,3]);
         translate([0,0,30])cylinder(3, 3.7, 3.7, $fn=20);
     }
 }
@@ -56,4 +56,4 @@ module nut(){
 
 
 electromagnet_bottom();
-electromagnet_top();
+//electromagnet_top();
