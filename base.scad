@@ -45,7 +45,7 @@ module balls(){
     
     union(){
         translate([0,0,bd])sphere(r=7, center=true, $fn=70);
-        for (a = [0:3]) {
+        for (a = [0:2]) {
             // row 1
             rotate([0,0,a*120-90])translate([r1,-8,bd])sphere(r=7, center=true, $fn=70);
             rotate([0,0,a*120-90])translate([r1,8,bd])sphere(r=7, center=true, $fn=70);
@@ -55,12 +55,12 @@ module balls(){
             rotate([0,0,a*120-90])translate([r2,17,bd])sphere(r=7, center=true, $fn=70);
             
         }
-        /*for (a = [0:3]) {
+        /*for (a = [0:2]) {
             // row 2
             rotate([0,0,a*120-30])translate([r2,-8,bd])sphere(r=7, center=true, $fn=70);
             rotate([0,0,a*120-30])translate([r2,8,bd])sphere(r=7, center=true, $fn=70);
         }*/
-        for (a = [0:6]) {
+        for (a = [0:5]) {
             // row 3
             rotate([0,0,a*60-90])translate([r3,-17,bd])sphere(r=7, center=true, $fn=70);
             rotate([0,0,a*60-90])translate([r3,0,bd])sphere(r=7, center=true, $fn=70);
@@ -108,5 +108,5 @@ module base(){
 }
 
 //base();
-bar();
-//platform();
+//bar();
+platform();
