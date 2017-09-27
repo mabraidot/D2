@@ -46,15 +46,17 @@ module electromagnet_bottom(){
 
 module electromagnet_tip(){
     
+    //translate([0,0,6.16])cube([10.8,5.6,3.7], center=true);
     difference(){
         union(){
             translate([0,0,4])cube([13,8,8], center=true);
-            translate([0,0,2])sphere(r=8, center=true, $fn=70);
+            translate([0,0,2])sphere(r=8, center=true, $fn=100);
         }
-        translate([0,0,4])cube([10.8,5.6,20], center=true);
+        translate([0,0,4])cube([10.9,5.6,20], center=true);
+        
         translate([0,0,13])cube([20,20,10], center=true);
         translate([0,0,-5])cube([20,20,10], center=true);
-        sphere(r=6.5, center=true);
+        translate([0,0,-1])sphere(r=6.5, center=true);
     }
     
 }
@@ -70,6 +72,6 @@ module nut(){
 }
 
 
-electromagnet_tip();
-//electromagnet_bottom();
+//electromagnet_tip();
+electromagnet_bottom();
 //electromagnet_top();
